@@ -1,0 +1,97 @@
+from pathlib import Path
+
+# Create a Path object
+path = Path('example_directory')
+
+# Check if a path exists
+exists = path.exists()  # Returns True if path exists
+print("Path Exists:", exists)
+
+# Check if a path is a file
+is_file = path.is_file()  # Returns True if path is a file
+print("Is File:", is_file)
+
+# Check if a path is a directory
+is_directory = path.is_dir()  # Returns True if path is a directory
+print("Is Directory:", is_directory)
+
+# Create a new directory
+path.mkdir()  # Creates a directory at the path
+print("Directory Created")
+
+# Create a new directory (with parents and if it already exists)
+path.mkdir(parents=True, exist_ok=True)  # Creates directory and any necessary parent directories
+
+# Remove a file
+file_path = Path('example_file.txt')
+file_path.unlink()  # Deletes the file at the path
+print("File Removed")
+
+# Remove a directory (empty)
+dir_path = Path('empty_directory')
+dir_path.rmdir()  # Removes the directory if it's empty
+print("Directory Removed")
+
+# Remove a directory (non-empty)
+import shutil
+shutil.rmtree('non_empty_directory')  # Recursively removes a directory and its contents
+print("Non-Empty Directory Removed")
+
+# Rename a file or directory
+new_path = Path('new_name.txt')
+file_path.rename(new_path)  # Renames the file or directory
+print("File or Directory Renamed")
+
+# Copy a file (requires shutil)
+import shutil
+shutil.copy('source_file.txt', 'destination_file.txt')  # Copies the file
+print("File Copied")
+
+# Get the absolute path
+absolute_path = path.resolve()  # Resolves the path to an absolute path
+print("Absolute Path:", absolute_path)
+
+# List contents of a directory
+for item in path.iterdir():
+    print("Item:", item)  # Prints each item in the directory
+
+# List contents of a directory with a specific suffix
+for txt_file in path.glob('*.txt'):
+    print("Text File:", txt_file)  # Prints each .txt file in the directory
+
+# Check if a path is absolute
+is_absolute = path.is_absolute()  # Returns True if path is absolute
+print("Is Absolute Path:", is_absolute)
+
+# Combine paths
+combined_path = path / 'subfolder' / 'file.txt'  # Joins paths using the / operator
+print("Combined Path:", combined_path)
+
+# Get the parent directory
+parent_dir = path.parent  # Returns the parent directory of the path
+print("Parent Directory:", parent_dir)
+
+# Get the name of the file or directory
+name = path.name  # Returns the name of the file or directory
+print("Name:", name)
+
+# Get the file extension
+extension = path.suffix  # Returns the file extension
+print("Extension:", extension)
+
+# Check the file extension
+is_txt = path.suffix == '.txt'  # Checks if the file has a .txt extension
+print("Is .txt File:", is_txt)
+
+# Create a new file
+new_file = Path('new_file.txt')
+new_file.write_text('Hello, world!')  # Writes text to the file
+print("File Created and Written")
+
+# Read from a file
+content = new_file.read_text()  # Reads text from the file
+print("File Content:", content)
+
+# Get file size
+file_size = new_file.stat().st_size  # Gets the size of the file in bytes
+print("File Size:", file_size, "bytes")
